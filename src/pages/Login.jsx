@@ -67,36 +67,45 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    background: "#0f172a", // azul escuro
+    background: "linear-gradient(135deg, #0f172a 0%, #3b82f6 100%)", // gradiente
   },
   form: {
-    background: "#1e293b", // fundo do form
+    background: "rgba(30,41,59,0.95)", // leve transparência
     padding: "2rem",
-    borderRadius: "10px",
-    boxShadow: "0 0 15px rgba(0,0,0,0.3)",
+    borderRadius: "16px",
+    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
     display: "flex",
     flexDirection: "column",
-    width: "300px",
+    width: "320px",
+    backdropFilter: "blur(4px)", // efeito glassmorphism
   },
   title: {
     color: "#fff",
     marginBottom: "1rem",
     textAlign: "center",
+    letterSpacing: "1px",
+    fontWeight: "bold",
+    fontSize: "2rem",
   },
   input: {
-    padding: "10px",
+    padding: "12px",
     marginBottom: "1rem",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
+    borderRadius: "8px",
+    border: "1px solid #60a5fa",
+    outline: "none",
+    fontSize: "1rem",
+    transition: "border-color 0.2s",
   },
   button: {
-    padding: "10px",
+    padding: "12px",
     backgroundColor: "#3b82f6",
     color: "#fff",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "8px",
     cursor: "pointer",
-    transition: "background-color 0.3s ease",
+    fontWeight: "bold",
+    fontSize: "1rem",
+    transition: "background 0.3s, transform 0.2s",
   },
   erro: {
     color: "red",
@@ -107,12 +116,13 @@ const styles = {
     marginTop: "1rem",
     color: "#fff",
     textAlign: "center",
-    fontSize: "0.9rem",
+    fontSize: "0.95rem",
   },
   link: {
     color: "#60a5fa",
     textDecoration: "none",
     fontWeight: "bold",
+    transition: "color 0.2s",
   },
 };
 

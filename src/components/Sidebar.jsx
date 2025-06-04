@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Sidebar({ isOpen, close, selectedPage, setSelectedPage, logout }) {
+export default function Sidebar({ isOpen, close, selectedPage, setSelectedPage, logout, darkMode }) {
   const menuItems = [
     { key: "agenda", label: "📅 Agenda", to: "/dashboard/agenda" },
     { key: "planejamento", label: "📈 Planejamento", to: "/dashboard/planejamento" },
@@ -10,28 +10,32 @@ export default function Sidebar({ isOpen, close, selectedPage, setSelectedPage, 
   return (
     <aside
       style={{
-        position: "fixed",
+        minHeight: "calc(100vh - 5rem)", // Garante altura mínima igual ao painel
+        height: "auto",                  // Permite crescer junto com o conteúdo
+        width: window.innerWidth < 768 ? "100vw" : 240,
+        padding: window.innerWidth < 768 ? "1.5rem 1rem" : "2rem 1rem",
+        background: "linear-gradient(135deg, #0f172a 0%, #3b82f6 100%)", // sempre azul
+        borderRadius: window.innerWidth < 768 ? 0 : "24px",
+        border: window.innerWidth < 768 ? "none" : "1.5px solid rgba(255,255,255,0.35)",
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.15)",
+        backdropFilter: "blur(8px)",
+        display: isOpen || window.innerWidth >= 768 ? "flex" : "none",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: window.innerWidth < 768 ? 0 : "2.5rem",    // alinhamento superior igual ao painel
+        marginLeft: window.innerWidth < 768 ? 0 : "2.5rem",   // alinhamento esquerdo igual ao painel
+        position: window.innerWidth < 768 ? "fixed" : "static",
         top: 0,
         left: 0,
-        height: "100vh", // Garante que a sidebar ocupe 100% da altura da tela
-        width: 240,
-        padding: "2rem 1rem", // Padding superior e inferior para o conteúdo
-        backgroundColor: "#2c3e50", // Cor de fundo da sidebar
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between", // Empurra o logo para o topo e o botão de sair para o final
-        alignItems: "center", // Centraliza o conteúdo horizontalmente
-        zIndex: 1000, // Z-index da sidebar (menor que o botão de hambúrguer temporário)
-        boxShadow: "2px 0 6px rgba(0,0,0,0.2)",
-        // Transição e posicionamento responsivo:
-        transform: isOpen ? "translateX(0)" : (window.innerWidth < 768 ? "translateX(-100%)" : "translateX(0)"),
-        transition: "transform 0.3s ease-in-out",
+        zIndex: 2000,
+        transition: "all 0.3s",
       }}
     >
       {/* Título "Meu Painel" */}
       <h2
         style={{
-          color: "#fff",
+          color: "#fff", // Sempre branco para o título
           textAlign: "center",
           marginBottom: "2rem",
           fontSize: 22,
@@ -58,25 +62,25 @@ export default function Sidebar({ isOpen, close, selectedPage, setSelectedPage, 
             key={item.key}
             onClick={() => {
               setSelectedPage(item.key);
-              if (window.innerWidth < 768) { // Fecha a sidebar em telas menores ao clicar
-                close();
-              }
+              if (window.innerWidth < 768) close();
             }}
             style={{
               padding: "12px 20px",
               display: "block",
               width: "100%",
               textAlign: "left",
-              color: selectedPage === item.key ? "#fff" : "#bdc3c7", // Cor do texto
-              textDecoration: "none",
-              background: selectedPage === item.key ? "#34495e" : "transparent", // Cor de fundo do item selecionado
+              color: "#fff", // Sempre branco
+              background: selectedPage === item.key
+                ? "rgba(59,130,246,0.85)" // Destaque azul para o ativo
+                : "transparent",
               transition: "background 0.3s, color 0.3s",
               borderRadius: "8px",
               border: "none",
               cursor: "pointer",
               fontSize: "inherit",
               outline: "none",
-              marginBottom: "8px", // Espaçamento entre os botões do menu
+              marginBottom: "8px",
+              fontWeight: selectedPage === item.key ? "bold" : "normal",
             }}
           >
             {item.label}
@@ -97,8 +101,8 @@ export default function Sidebar({ isOpen, close, selectedPage, setSelectedPage, 
         <button
           onClick={logout}
           style={{
-            color: "#fff", // Cor branca para o texto do botão
-            backgroundColor: "#e74c3c", // Fundo vermelho para destaque
+            color: "#fff", // Sempre branco
+            backgroundColor: "#ef4444",
             textDecoration: "none",
             fontSize: 18,
             padding: "0.8rem 1.5rem",
@@ -107,8 +111,8 @@ export default function Sidebar({ isOpen, close, selectedPage, setSelectedPage, 
             cursor: "pointer",
             transition: "background-color 0.3s ease",
             textAlign: 'center',
-            width: 'calc(100% - 2rem)', // Ocupa a largura total menos 1rem de padding de cada lado
-            maxWidth: '200px', // Limite máximo para a largura do botão
+            width: 'calc(100% - 2rem)',
+            maxWidth: '200px',
           }}
         >
           ⏏️ Sair
