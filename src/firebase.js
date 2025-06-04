@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore } from "firebase/firestore"; // <-- Adicione esta linha
 
 const firebaseConfig = {
   apiKey: "AIzaSyCE_rugedit2krNZbfm7gk_GZ-EnTwhJqc",
@@ -12,4 +13,5 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore(app); // <-- Adicione esta linha
 export { onAuthStateChanged };
